@@ -1,0 +1,59 @@
+# NOTE TAKING APP PROJECT
+
+# step 1: define the file name
+FILE_NAME = "mynote.txt"
+
+# step 2: menu display option
+def show_menu():
+    print("\n----- 📝 NOTE-TAKING APP -----")
+    print("1. ➕ Add Note")
+    print("2. 📖 View Notes")
+    print("3. 🗑 Delete Notes")
+    print("4. 🚪 Exit")
+
+# step 3: add note
+def add_note():
+    note = input("✏ Enter your note: ")
+    with open(FILE_NAME, "a") as file:
+        file.write(note + "\n")
+    print("✅ Note added successfully!")
+
+# step 4: view all notes
+def view_notes():
+    try:
+        with open(FILE_NAME, "r") as file:
+            content = file.read()
+            if content:
+                print("\n📒 Your Notes:\n")
+                print(content)
+            else:
+                print("⚠ No note found")
+    except FileNotFoundError:
+        print("⚠ No note found")
+
+# step 5: delete all the notes
+def delete_note():
+    confirm = input("❓ Are you sure you want to delete all notes? (yes/no): ")
+    if confirm.lower() == "yes":
+        with open(FILE_NAME, "w") as file:
+            pass
+        print("🗑 All notes deleted successfully")
+    else:
+        print("❌ Deletion cancelled")
+
+# step 6: main menu and loop
+while True:
+    show_menu()
+    choice = input("👉 Enter your choice (1/2/3/4): ")
+
+    if choice == "1":
+        add_note()
+    elif choice == "2":
+        view_notes()
+    elif choice == "3":
+        delete_note()
+    elif choice == "4":
+        print("👋 Goodbye")
+        break
+    else:
+        print("⚠ Invalid choice. Please try again.")
